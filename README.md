@@ -11,6 +11,16 @@
 指定した PDF ファイルの内容を解析し、要点を抽出したり、特定の質問に対して回答を生成することができます。
 フレームワークとしてDjangoを用いています
 
+## 主要なインポート
+- pip install Django
+- pip install django-environ
+- pip install --quiet --upgrade langchain langchain-community langchain-chroma
+- pip install -qU langchain-openai
+- pip install PyMuPDF<br>
+足りないものがあった場合は追加でimportして下さい(仮想環境はvenvを使用)
+
+
+
 ## 著作権に関する注意 (Copyright Notice)
 本ソフトウェアは、PDFの内容を解析・検索するためのツールです。  
 **著作権のあるPDFを扱う際は、使用者の責任で適切に取り扱ってください。**  
