@@ -1,0 +1,62 @@
+
+/* チャット全体のスタイル */
+.chat-container {
+    display: flex; /* フレックスボックスで子要素を配置 */
+    flex-direction: column; /* 子要素を縦並びに */
+    max-height: 400px; /* 固定高さ */
+    overflow-y: auto;  /* 縦スクロール有効 */
+    padding-right: 10px; /* スクロールバーとの余白 */
+    border: 1px solid #ddd; /* 枠線 */
+    background-color: #f9f9f9;
+}
+
+
+/* 吹き出しの基本スタイル */
+.chat-bubble {
+    display: inline-block; /* 内容に合わせて幅を調整 */
+    max-width: 70%;
+    padding: 3px 6px;
+    border-radius: 10px;
+    position: relative;
+    font-size: 14px;
+    line-height: 1.5;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+}
+
+/* ユーザー側（右寄せ） */
+.chat-bubble.user {
+    align-self: flex-end;
+    background-color: #dcf8c6; /* LINEのような緑 */
+    border-bottom-right-radius: 0;
+    text-align: left;
+}
+
+/* システム側（左寄せ） */
+.chat-bubble.system {
+    align-self: flex-start;
+    background-color: #f1f0f0; /* システム側の灰色 */
+    border-bottom-left-radius: 0;
+    text-align: left;
+}
+
+/* 吹き出し内のテキスト */
+.chat-text {
+    margin: 0;
+}
+
+/* 吹き出し内のタイムスタンプ */
+.chat-time {
+    display: block;
+    font-size: 12px;
+    color: #888;
+    margin-top: 5px;
+    text-align: right;
+}
+
+.scrollable {
+    max-height: 300px; /* 高さを固定 */
+    overflow-y: auto;  /* 縦方向にスクロール */
+    padding: 10px;     /* 内側の余白 */
+    border: 1px solid #ccc; /* 枠線を追加 */
+}

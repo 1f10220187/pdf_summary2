@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <title>PDF要約アプリ</title>
+</head>
+<body class="bg-light">
+    <header  class="bg-info-subtle py-3">
+        <h1 class="m-4 text-center display-2 font-monospace">PDF要約アプリ</h1>
+    </header>
+    <div class="container mt-4 bg-light p-4">
+
+        <!-- フォーム -->
+        <div class="card p-4 mb-4">
+            <h2 class="card-title">PDFを登録する</h2>
+            <form method="post" enctype="multipart/form-data" class="mt-3">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="name" class="form-label">PDFの名前:</label>
+                    <small class="d-block text-muted">
+                        お好きな名前を入力してください
+                    </small>
+                    <input type="text" id="name" name="name" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <label for="url" class="form-label">PDFのURL:</label>
+                    <small class="d-block text-muted">
+                        要約を生成したいpdfファイルのurlを入力してください<br>
+                        <p class="text-danger">※規約で禁止されているサイトは入力しないで下さい。</p>
+                    </small>
+                    <input type="url" id="url" name="url" class="form-control">
+                </div>
+                <div>
+                    <label for="pdf_file" class="form-label">PDFをアップロード</label>
+                    <small class="d-block text-muted">
+                        要約を生成したいpdfファイルをアップロードしてください<br>
+                        <p class="text-danger">※アップロードが許可されていないファイルはアップロードしないで下さい。</p>
+                    </small>
+                    <input type="file" id="pdf_file" name="pdf_file">
+                </div>
+                <small class="text-muted">
+                    URLまたはアップロードのいずれか一方を入力してください（両方も可）。
+                </small>
+                <button type="submit" class="btn btn-primary">要約を作成</button>
+            </form>
+        </div>
+
+        <!-- エラーメッセージ -->
+        {% if error_message %}
+        <div class="alert alert-danger" role="alert">
+            {{ error_message }}
+        </div>
+        {% endif %}
+
+        <!-- PDF一覧 -->
+        <div class="card p-4">
+            <h2 class="card-title">登録済みPDF一覧</h2>
+            <ul class="list-group list-group-flush mt-3">
+                {% for pdf in pdf_list %}
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <a href="{% url 'detail' pdf.pk %}" class="text-decoration-none">{{ pdf.name }}</a>
+                        <small class="text-muted">{{ pdf.created_at }}</small>
+                        <form method="post" action="{% url 'delete_pdf' pdf.pk %}" style="display:inline;">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-danger btn-sm">削除</button>
+                        </form>
+                    </li>
+                {% empty %}
+                    <p>まだPDFが登録されていません。</p>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    
+
+    <script>
+        document.querySelectorAll('form[action*="delete"]').forEach(form => {
+            form.addEventListener('submit', function(e) {
+                if (!confirm('本当に削除しますか？')) {
+                    e.preventDefault();
+                }
+            });
+        });
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+</body>
+</html>
