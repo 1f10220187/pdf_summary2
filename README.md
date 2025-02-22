@@ -12,7 +12,7 @@
 指定した PDF ファイルの内容を解析し、要点を抽出したり、特定の質問に対して回答を生成することができます。
 フレームワークとしてDjangoを用いています
 
-## 主要なインポート
+## 主要なインポート(Windows PowerShell想定)
 - pip install Django
 - pip install django-environ
 - pip install --quiet --upgrade langchain langchain-community langchain-chroma
