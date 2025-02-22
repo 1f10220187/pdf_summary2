@@ -1,4 +1,5 @@
 # pdf_summary
+## RAGをDjangoで使う方法を学びたくて作ったものです。
 ## 環境変数の設定
 使用の際はプロジェクト直下に.envファイルを作成し、以下の変数を定義してください
 - OPENAI_API_KEY={openAIのAPIキー}
